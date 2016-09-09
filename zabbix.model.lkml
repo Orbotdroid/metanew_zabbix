@@ -31,22 +31,22 @@ explore: event_counts {}
 explore: hosts {
 
   join: items {
-    sql: ${hosts.hostid}=${items.hostid} ;;
-    relationship: one_to_many
+    sql: ${items.hostid}=${hosts.hostid} ;;
+    relationship: many_to_one
   }
 
   join: functions {
-    sql: ${functions.itemid}=${items.itemid} ;;
+    sql: ${items.itemid}=${functions.itemid} ;;
     relationship: one_to_one
   }
 
   join: triggers {
-    sql: ${triggers.triggerid}=${functions.triggerid} ;;
+    sql: ${functions.triggerid}=${triggers.triggerid} ;;
     relationship: one_to_one
   }
 
   join: events {
-    sql: ${events.objectid}=${triggers.triggerid} ;;
+    sql: ${triggers.triggerid}=${events.objectid} ;;
     relationship: one_to_many
   }
 
