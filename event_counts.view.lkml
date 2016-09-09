@@ -1,6 +1,6 @@
 view: event_counts {
   derived_table: {
-    sql: SELECT e.event_id as eventid
+    sql: SELECT e.eventid as eventid
         , count(distinct e.eventid) as cnt_event
         , h.host as host
         , t.description as description
@@ -18,7 +18,7 @@ view: event_counts {
       GROUP BY h.host,t.triggerid,t.description,t.expression,t.priority
       ORDER BY cnt_event desc, h.host, t.description, t.triggerid
        ;;
-    indexes: ["e.event_id"]
+    indexes: ["e.eventid"]
     persist_for: "48 hours"
   }
 
