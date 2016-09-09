@@ -12,7 +12,6 @@ view: events {
   }
 
   dimension_group: clock {
-    label: "Time"
     type: time
     datatype: epoch
     timeframes: [time,hour_of_day,time_of_day,date,day_of_week,year]
