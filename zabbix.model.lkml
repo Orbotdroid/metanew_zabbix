@@ -9,7 +9,7 @@ explore:  events {
 
   join: triggers {
     sql_on: ${triggers.triggerid}=${events.objectid} ;;
-    relationship: one_to_many
+    relationship: one_to_one
   }
   #functions are last, min, nodata, sum, etc
   join: functions {
@@ -24,6 +24,6 @@ explore:  events {
 
   join: hosts {
     sql: ${hosts.hostid}=${items.hostid} ;;
-    relationship: one_to_many
+    relationship: many_to_one
   }
 }
