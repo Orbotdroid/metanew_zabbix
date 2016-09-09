@@ -41,3 +41,12 @@ explore:  events {
     relationship: one_to_many
   }
 }
+
+explore: maintenances {
+
+  join: maintenances_hosts {
+    sql_on: ${maintenances.maintenanceid}=${maintenances_hosts.maintenanceid} ;;
+    relationship: one_to_many
+  }
+
+}
