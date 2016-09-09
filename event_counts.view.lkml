@@ -18,7 +18,7 @@ view: event_counts {
       GROUP BY h.host,t.triggerid,t.description,t.expression,t.priority
       ORDER BY cnt_event desc, h.host, t.description, t.triggerid
        ;;
-    indexes: ["e.eventid"]
+    indexes: ["eventid"]
     persist_for: "48 hours"
   }
 
