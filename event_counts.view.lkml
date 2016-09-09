@@ -1,7 +1,7 @@
 view: event_counts {
   derived_table: {
-    sql: SELECT e.event_id
-        ,count(distinct e.eventid) as cnt_event
+    sql: SELECT e.event_id as eventid
+        , count(distinct e.eventid) as cnt_event
         , h.host as host
         , t.description as description
         , t.priority as priority
