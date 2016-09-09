@@ -36,7 +36,7 @@ explore: hosts {
   }
 
   join: functions {
-    sql: ${items.itemid}=${functions.itemid} ;;
+    sql: ${functions.itemid}=${items.itemid} ;;
     relationship: one_to_one
   }
 
