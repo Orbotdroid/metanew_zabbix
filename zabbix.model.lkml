@@ -40,6 +40,16 @@ explore:  events {
     sql_on: ${hosts.hostid}=${items.hostid} ;;
     relationship: one_to_many
   }
+
+  join: hosts_groups {
+    sql_on: ${hosts.hostid}=${hosts_groups.hostid} ;;
+    relationship: many_to_one
+  }
+
+  join: groups {
+    sql_on: ${hosts_groups.hostid}=${hosts.hostid} ;;
+    relationship: one_to_many
+  }
 }
 
 explore: maintenances {
