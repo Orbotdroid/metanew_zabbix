@@ -50,13 +50,18 @@ explore:  events {
     sql_on: ${hosts_groups.hostid}=${hosts.hostid} ;;
     relationship: one_to_many
   }
+
+  join: history {
+    sql_on: ${items.itemid}=${history.itemid} ;;
+    relationship: one_to_many
+  }
 }
 
-explore: maintenances {
+explore: alerts {
 
-  join: maintenances_hosts {
-    sql_on: ${maintenances.maintenanceid}=${maintenances_hosts.maintenanceid} ;;
-    relationship: one_to_many
+  join: actions {
+    sql_on: ${alerts.actionid}=${actions.actionid} ;;
+    relationship: one_to_one
   }
 
 }
