@@ -55,6 +55,11 @@ explore:  events {
     sql_on: ${items.itemid}=${history.itemid} ;;
     relationship: one_to_many
   }
+
+  join: alerts {
+    sql_on: ${events.eventid}=${alerts.eventid} ;;
+    relationship: one_to_one
+  }
 }
 
 explore: alerts {
