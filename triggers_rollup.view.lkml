@@ -1,21 +1,19 @@
 view: triggers_rollup {
   derived_table: {
     sql:
-      SELECT DISTINCT
+     SELECT DISTINCT
         hosts.host AS RESOURCENAME
-        , #history.clock AS "TIMESTAMP"
         , h.clock as "TIMESTAMP"
         , "host.key" AS IDENTKEY2
         , hosts.hostid AS IDENTVALUE2
         , SUBSTRING_INDEX(items.key_, '.', -2) AS METRICNAME1
-        , triggers.description as DESCRIPTION
+        , triggers.description AS DESCRIPTION
         , functions.triggerid
-        , events.acknowledged as ACKNOWLEDGED
+        , events.acknowledged AS ACKNOWLEDGED
         , triggers.value as VALUE
       FROM triggers
         INNER JOIN functions ON ( functions.triggerid = triggers.triggerid )
         INNER JOIN items ON ( items.itemid = functions.itemid )
-        #INNER JOIN history ON ( items.itemid = history.itemid)
         INNER JOIN (select clock, itemid from history  group by itemid order by clock desc) h ON h.itemid =items.itemid
         INNER JOIN hosts ON ( items.hostid = hosts.hostid )
         INNER JOIN events ON ( events.objectid = triggers.triggerid )
