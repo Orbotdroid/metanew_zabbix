@@ -62,11 +62,6 @@ explore:  events {
   }
 }
 
-explore: alerts {
-
-  join: actions {
-    sql_on: ${alerts.actionid}=${actions.actionid} ;;
-    relationship: one_to_one
-  }
-
+explore: triggers_rollup {
+  view_label: "Current Alerts"
 }
