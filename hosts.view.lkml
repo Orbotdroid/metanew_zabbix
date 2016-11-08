@@ -199,7 +199,7 @@ view: hosts {
     sql: ${TABLE}.tls_subject ;;
   }
 
-  dimension: host_url {
+  dimension: zabbix_url {
     type:  number
     sql: ${TABLE}.hostid ;;
     html:
