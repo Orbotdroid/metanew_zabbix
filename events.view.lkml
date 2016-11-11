@@ -47,7 +47,7 @@ view: events {
 
   measure: count {
     type: count
-    drill_fields: [eventid, acknowledges.count, alerts.count, escalations.count]
+    drill_fields: [ hosts.hostname ]
   }
 
 }
