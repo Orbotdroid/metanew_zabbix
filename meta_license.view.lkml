@@ -394,6 +394,7 @@ SELECT "3603" as ID, "10/24/2016" as CREATED_DATE, "715" as MAX_QUERY_COUNT, "9"
   dimension: max_user_count_tiers {
     type: tier
     tiers: [0,10,50,100,200,300,400,500,1000]
+    style: integer
     sql: ${TABLE}.max_user_count ;;
   }
 

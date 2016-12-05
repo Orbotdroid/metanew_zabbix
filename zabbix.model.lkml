@@ -2,7 +2,7 @@ connection: "zabbix"
 include: "*.view.lkml"
 include: "*.dashboard.lkml"
 
-# events are trigger status changes
+# events are trigger status changes - most granular table in zab
 explore:  events {
   # triggers are the logic that finds problems
   join: triggers {
