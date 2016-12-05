@@ -2,22 +2,6 @@ connection: "zabbix"
 include: "*.view.lkml"
 include: "*.dashboard.lkml"
 
-# explore: event_counts {}
-
-# explore: hosts {
-#   # always_join: [items,functions]
-#   join: items {
-#     sql_on: ${items.hostid}=${hosts.hostid} ;;
-#     relationship: many_to_many
-#   }
-#
-#   join: functions {
-#     sql_on: ${items.itemid}=${functions.itemid} ;;
-#     relationship: many_to_one
-#   }
-#
-# }
-
 # events are trigger status changes
 explore:  events {
   # triggers are the logic that finds problems
@@ -66,6 +50,33 @@ explore:  events {
     relationship: many_to_one
   }
 
+  join:  operations {
+    sql_on: ${actions.actionid}=${operations.actionid} ;;
+    relationship: one_to_many
+  }
+
+  join: opcommand {
+    sql_on: ${operations.operationid}=${opcommand.operationid} ;;
+    relationship: one_to_many
+  }
+
+  join: meta_license_host {
+    sql_on: ${hosts.name}=${meta_license_host.name} ;;
+    relationship: one_to_one
+  }
+  #added 12/2/2016
+  join: meta_license {
+    sql_on: ${meta_license_host.license_id}=${meta_license.id} ;;
+    relationship: one_to_one
+  }
+  #added 12/2/2016
+  join: meta_license_type {
+    sql_on: ${meta_license.id}=${meta_license_host.license_id} ;;
+    relationship: one_to_one
+  }
+
+
+#   }
 #   join: scripts {
 #     sql_on: ${scripts.groupid}=${groups.groupid} ;;
 #     relationship: one_to_many
@@ -117,8 +128,92 @@ explore:  triggers {
     sql_on: ${operations.operationid}=${opcommand.operationid} ;;
     relationship: one_to_many
   }
+  #added 12/2/2016
+  join: meta_license_host {
+    sql_on: ${hosts.name}=${meta_license_host.name} ;;
+    relationship: one_to_one
+  }
+  #added 12/2/2016
+  join: meta_license {
+    sql_on: ${meta_license_host.license_id}=${meta_license.id} ;;
+    relationship: one_to_one
+  }
+  #added 12/2/2016
+  join: meta_license_type {
+    sql_on: ${meta_license.id}=${meta_license_host.license_id} ;;
+    relationship: one_to_one
+  }
+}
+
+explore: hosts {
+
+  join: items {
+    sql_on: ${hosts.hostid}=${items.hostid} ;;
+    relationship: one_to_many
+  }
+
+  join: functions {
+    sql_on: ${functions.itemid}=${items.itemid} ;;
+    relationship: one_to_many
+  }
+
+  join: triggers {
+    sql_on: ${triggers.triggerid}=${functions.triggerid} ;;
+    relationship: one_to_many
+  }
+
+  join: events {
+    sql_on: ${events.objectid}=${triggers.triggerid} ;;
+    relationship: many_to_one
+  }
+
+  join: alerts {
+    sql_on: ${events.eventid}=${alerts.eventid} ;;
+    relationship: many_to_one
+  }
+
+  join: actions {
+    sql_on: ${alerts.actionid}=${actions.actionid} ;;
+    relationship: many_to_one
+  }
+
+  join:  operations {
+    sql_on: ${actions.actionid}=${operations.actionid} ;;
+    relationship: one_to_many
+  }
+
+  join: opcommand {
+    sql_on: ${operations.operationid}=${opcommand.operationid} ;;
+    relationship: one_to_many
+  }
+
+  join: meta_license_host {
+    sql_on: ${hosts.name}=${meta_license_host.name} ;;
+    type: inner
+    relationship: one_to_one
+  }
+
+  join: meta_license {
+    sql_on: ${meta_license_host.license_id}=${meta_license.id} ;;
+    relationship: one_to_one
+  }
+
+  join: meta_license_type {
+    sql_on: ${meta_license.id}=${meta_license_host.license_id} ;;
+    relationship: one_to_one
+  }
+
+#   join: meta_license_status {
+#     sql_on: ${meta_license.license_type_id}=${meta_license_type.id} ;;
+#     relationship: one_to_one
+#   }
+
 
 }
+
+#explore: release_facts_test {}
+
+#explore: release_host_mapping {}
 
 # explore: history {
 #

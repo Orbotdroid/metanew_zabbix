@@ -12,7 +12,7 @@ view: events {
   }
 
   dimension_group: clock {
-    label: ""
+    label: "time"
     type: time
     datatype: epoch
     timeframes: [time,hour_of_day,time_of_day,date,day_of_week,year]
@@ -47,7 +47,13 @@ view: events {
 
   measure: count {
     type: count
-    drill_fields: [ hosts.hostname ]
+    drill_fields: [ hosts.name, clock_time ]
   }
+
+#   measure: stability_metric {
+#     description: "Total crashes divided by number of hosts"
+#     sql: ${count}/${hosts.count} ;;
+#     value_format_name: percent_2
+#   }
 
 }
