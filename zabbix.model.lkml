@@ -4,6 +4,7 @@ include: "*.dashboard.lkml"
 
 # events are trigger status changes - most granular table in zab
 explore:  events {
+  hidden: yes
   # triggers are the logic that finds problems
   join: triggers {
     sql_on: ${triggers.triggerid}=${events.objectid} ;;
@@ -128,7 +129,7 @@ explore:  triggers {
     sql_on: ${operations.operationid}=${opcommand.operationid} ;;
     relationship: one_to_many
   }
-  #added 12/2/2016
+  #added 12/2/2016 - join zab to meta based on hostname
   join: meta_license_host {
     sql_on: ${hosts.name}=${meta_license_host.name} ;;
     relationship: one_to_one
@@ -146,7 +147,7 @@ explore:  triggers {
 }
 
 explore: hosts {
-
+  hidden: yes
   join: items {
     sql_on: ${hosts.hostid}=${items.hostid} ;;
     relationship: one_to_many
