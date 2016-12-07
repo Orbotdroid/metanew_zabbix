@@ -15,7 +15,7 @@ view: events {
     label: "time"
     type: time
     datatype: epoch
-    timeframes: [time,hour_of_day,time_of_day,date,day_of_week,year]
+    timeframes: [time,hour_of_day,time_of_day,date,day_of_week,week,month,year]
     sql: ${TABLE}.clock ;;
   }
 
@@ -45,10 +45,21 @@ view: events {
     sql: ${TABLE}.value ;;
   }
 
+  dimension: count_coalesce {
+    hidden: yes
+    label: "Coalesce Count"
+    type: number
+    sql: COALESCE(${count},0) ;;
+    drill_fields: [ hosts.name, clock_time ]
+  }
+
   measure: count {
     type: count
     drill_fields: [ hosts.name, clock_time ]
   }
+
+
+
 
 #   measure: stability_metric {
 #     description: "Total crashes divided by number of hosts"
