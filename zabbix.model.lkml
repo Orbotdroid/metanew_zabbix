@@ -89,42 +89,42 @@ explore:  events {
 # }
 
 explore:  triggers {
-
+  #functions have triggers
   join: functions {
     sql_on: ${functions.triggerid}=${triggers.triggerid} ;;
     relationship: many_to_one
   }
-
+  #items have functions
   join: items {
     sql_on: ${items.itemid}=${functions.itemid} ;;
     relationship: one_to_many
   }
-
+  #hosts have items
   join: hosts {
     sql_on: ${hosts.hostid}=${items.hostid} ;;
     relationship: one_to_many
   }
-
+  #triggers may create events
   join: events {
     sql_on: ${events.objectid}=${triggers.triggerid} ;;
     relationship: many_to_one
   }
-
+  #events may cause alerts
   join: alerts {
     sql_on: ${events.eventid}=${alerts.eventid} ;;
     relationship: many_to_one
   }
-
+  #alerts may be linked to actions
   join: actions {
     sql_on: ${alerts.actionid}=${actions.actionid} ;;
     relationship: many_to_one
   }
-
+  #actions may have operations
   join:  operations {
     sql_on: ${actions.actionid}=${operations.actionid} ;;
     relationship: one_to_many
   }
-
+  #operations may include opcommands
   join: opcommand {
     sql_on: ${operations.operationid}=${opcommand.operationid} ;;
     relationship: one_to_many
