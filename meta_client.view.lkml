@@ -2962,7 +2962,7 @@ SELECT '2969' as id, 'upperhand' as name, '' as phone, '' as email, '0014400001j
 SELECT '2970' as id, 'micah' as name, '' as phone, 'micah@looker.com' as email, '' as salesforce_account_id ;;
 
     indexes: [ "id"]
-    sql_trigger_value: SELECT 1 ;;
+    persist_for: "9999 hours"
   }
 
   # DIMENSIONS #
