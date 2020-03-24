@@ -89,6 +89,7 @@ explore:  events {
 # }
 
 explore:  triggers {
+  hidden: yes
   #functions have triggers
   join: functions {
     sql_on: ${functions.triggerid}=${triggers.triggerid} ;;
